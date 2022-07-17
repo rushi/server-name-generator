@@ -3,9 +3,10 @@ service: server-name-generator
 provider:
     name: aws
     runtime: nodejs14.x
+    environment:
+        IS_SERVERLESS: true
     apiGateway:
         shouldStartNameWithService: true
-    lambdaHashingVersion: 20201221
 
 plugins:
     - serverless-offline
@@ -16,7 +17,7 @@ custom:
 
 functions:
     api:
-        handler: index.default
+        handler: src/index.default
         events:
-            - http: ANY /
-            - http: ANY /{proxy+}
+            - http: GET /
+            - http: GET /{proxy+}

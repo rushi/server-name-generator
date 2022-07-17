@@ -7,4 +7,8 @@ const handler = (event, context) => {
     serverlessExpress.proxy(server, event, context);
 };
 
-module.exports = handler;
+if (process.env.IS_SERVERLESS) {
+    module.exports = { default: handler };
+} else {
+    module.exports = handler;
+}

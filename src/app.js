@@ -24,7 +24,7 @@ app.get("/error", (req, res, next) => {
 
 app.use((req, res, next) => {
     return res.status(404).json({
-        message: "Not Found",
+        message: "Hey, this is a 404 Not Found",
     });
 });
 
