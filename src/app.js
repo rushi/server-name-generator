@@ -5,7 +5,7 @@ const { uniqueNamesGenerator, adjectives, colors, starWars, animals } = require(
 const { marvel, starTrek, gameOfThrones } = require("./custom-names.js");
 
 const app = express();
-const DEFAULT_LENGTH = 3;
+const DEFAULT_LENGTH = 2;
 
 app.get("/", (req, res, next) => {
     const seed = req.query.hostname ?? req.query.seed ?? uniqueId();

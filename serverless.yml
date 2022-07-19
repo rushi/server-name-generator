@@ -3,6 +3,8 @@ service: server-name-generator
 provider:
     name: aws
     runtime: nodejs14.x
+    deploymentBucket:
+      blockPublicAccess: true
     environment:
         IS_SERVERLESS: true
     apiGateway:
