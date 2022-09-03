@@ -32,7 +32,7 @@ const getName = (seed, length = 3) => {
     const dictionaries = [adjectives, animals, colors, marvel, gameOfThrones, starWars, starTrek];
     const words = length >= dictionaries.length ? dictionaries.length : length;
     const shortName = uniqueNamesGenerator({
-        dictionaries: sampleSize(dictionaries, words),
+        dictionaries,
         separator: "-",
         style: "lowerCase",
         seed,
