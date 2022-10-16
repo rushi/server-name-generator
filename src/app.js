@@ -1,6 +1,6 @@
 const express = require("express");
 const { shuffle, deburr } = require("lodash");
-const { uniqueNamesGenerator, adjectives, names, starWars, animals } = require("unique-names-generator");
+const { uniqueNamesGenerator, adjectives, names, colors, starWars, animals } = require("unique-names-generator");
 const { marvel, starTrek, gameOfThrones } = require("./custom-names.js");
 
 const app = express();
@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 const getName = (seed, type, separatorChar, style, length = DEFAULT_LENGTH) => {
     const dictionaries =
         type === "server"
-            ? shuffle([adjectives, animals, names, marvel, gameOfThrones, starWars, starTrek])
+            ? shuffle([adjectives, animals, colors, names, marvel, gameOfThrones, starWars, starTrek])
             : shuffle([names, names, marvel, gameOfThrones, starWars, starTrek]);
     const words = length >= dictionaries.length ? dictionaries.length : length;
     const separator = separatorChar === ":space:" ? " " : separatorChar;
