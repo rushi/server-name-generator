@@ -1,20 +1,21 @@
 const express = require("express");
-const { uniqueId } = require("lodash");
-const { sampleSize, deburr } = require("lodash");
-const { uniqueNamesGenerator, adjectives, colors, starWars, animals } = require("unique-names-generator");
+const { random, deburr } = require("lodash");
+const { uniqueNamesGenerator, adjectives, names, starWars, animals } = require("unique-names-generator");
 const { marvel, starTrek, gameOfThrones } = require("./custom-names.js");
 
 const app = express();
 const DEFAULT_LENGTH = 2;
 
 app.get("/", (req, res, next) => {
-    const seed = req.query.hostname ?? req.query.seed ?? uniqueId();
+    const seed = req.query.hostname ?? req.query.seed ?? random(1, Number.MAX_SAFE_INTEGER);
     const length = req.query.length ?? DEFAULT_LENGTH;
-    
-    const name = getName(seed, length);
-    console.log("Response", { name, seed, length });
-    
-    return res.status(200).send(name);
+    const separator = req.query.separator ?? "-";
+    const style = req.query.style ?? "lowerCase";
+
+    const name = getName(seed, separator, style, length);
+    console.log("Response", { name, seed, length, separatorChar: separator, style });
+
+    res.status(200).send(name);
 });
 
 app.get("/error", (req, res, next) => {
@@ -28,18 +29,20 @@ app.use((req, res, next) => {
     });
 });
 
-const getName = (seed, length = 3) => {
-    const dictionaries = [adjectives, animals, colors, marvel, gameOfThrones, starWars, starTrek];
+const getName = (seed, separatorChar, style, length = DEFAULT_LENGTH) => {
+    const dictionaries = [adjectives, animals, names, marvel, gameOfThrones, starWars, starTrek];
     const words = length >= dictionaries.length ? dictionaries.length : length;
+    const separator = separatorChar === ":space:" ? " " : separatorChar;
     const shortName = uniqueNamesGenerator({
         dictionaries,
-        separator: "-",
-        style: "lowerCase",
+        separator,
+        style,
         seed,
         length: words,
     });
 
-    return deburr(shortName.replace(/(&|\s)+/gi, "-").toLowerCase());
+    // return deburr(shortName.replace(/(&)+/gi, "-").toLowerCase());
+    return deburr(shortName);
 };
 
 module.exports = app;
