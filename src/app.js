@@ -11,9 +11,11 @@ app.get("/", (req, res, next) => {
     const length = req.query.length ?? DEFAULT_LENGTH;
     const separator = req.query.separator ?? "-";
     const style = req.query.style ?? "lowerCase";
+    // Can be server or person
+    const type = req.query.type ?? "person";
 
-    const name = getName(seed, separator, style, length);
-    console.log("Response", { name, seed, length, separatorChar: separator, style });
+    const name = getName(seed, type, separator, style, length);
+    console.log("Response", { name, type, seed, length, separatorChar: separator, style });
 
     res.status(200).send(name);
 });
@@ -29,8 +31,11 @@ app.use((req, res, next) => {
     });
 });
 
-const getName = (seed, separatorChar, style, length = DEFAULT_LENGTH) => {
-    const dictionaries = shuffle([adjectives, animals, names, marvel, gameOfThrones, starWars, starTrek]);
+const getName = (seed, type, separatorChar, style, length = DEFAULT_LENGTH) => {
+    const dictionaries =
+        type === "server"
+            ? shuffle([adjectives, animals, names, marvel, gameOfThrones, starWars, starTrek])
+            : shuffle([names, names, marvel, gameOfThrones, starWars, starTrek]);
     const words = length >= dictionaries.length ? dictionaries.length : length;
     const separator = separatorChar === ":space:" ? " " : separatorChar;
     const shortName = uniqueNamesGenerator({
