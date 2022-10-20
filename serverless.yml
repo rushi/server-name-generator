@@ -21,5 +21,11 @@ functions:
     api:
         handler: src/index.default
         events:
-            - http: GET /
-            - http: GET /{proxy+}
+            - http:
+                method: GET
+                path: /
+                cors: true
+            - http:
+                method: GET
+                path: /{proxy+}
+                cors: true
