@@ -2,7 +2,7 @@
 
 A server name generator for AWS Lambda that will generate names based on various topics like color, adjectives, star wars characters etc.
 
-This is built on top of the good [unique-names-generator](https://www.npmjs.com/package/unique-names-generator) library. It extends that library along with a few additional dictionaries. See [src/custom-names.js](blob/main/src/custom-names.js) for the new list.
+This is built on top of the good [unique-names-generator](https://www.npmjs.com/package/unique-names-generator) library. It extends that library along with a few additional dictionaries. See [src/custom-names.js](/src/custom-names.js) for the new list.
 
 ### Setup
 
