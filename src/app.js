@@ -2,9 +2,13 @@ const express = require("express");
 const { shuffle, deburr } = require("lodash");
 const { uniqueNamesGenerator, adjectives, names, colors, starWars, animals } = require("unique-names-generator");
 const { marvel, starTrek, gameOfThrones } = require("./custom-names.js");
+const cors = require("cors");
 
 const app = express();
+app.use(cors());
 const DEFAULT_LENGTH = 2;
+
+app.options("*", cors()); // enable pre-flight
 
 app.get("/", (req, res, next) => {
     const seed = req.query.hostname ?? req.query.seed ?? Math.random().toString(36).slice(2);
