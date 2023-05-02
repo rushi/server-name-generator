@@ -1,10 +1,11 @@
 service: server-name-generator
+frameworkVersion: "3"
 
 provider:
     name: aws
-    runtime: nodejs14.x
+    runtime: nodejs18.x
     deploymentBucket:
-      blockPublicAccess: true
+        blockPublicAccess: true
     environment:
         IS_SERVERLESS: true
     apiGateway:
@@ -19,13 +20,6 @@ custom:
 
 functions:
     api:
-        handler: src/index.default
+        handler: src/index.handler
         events:
-            - http:
-                method: GET
-                path: /
-                cors: true
-            - http:
-                method: GET
-                path: /{proxy+}
-                cors: true
+            - httpApi: "*"

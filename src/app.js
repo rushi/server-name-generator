@@ -51,9 +51,7 @@ const getName = (seed, type, separatorChar, style, length = DEFAULT_LENGTH) => {
     });
 
     // return deburr(shortName.replace(/(&)+/gi, "-").toLowerCase());
-    return deburr(shortName)
-        .replace(/\.|\s+/g, "")
-        .toLowerCase();
+    return deburr(shortName);
 };
 
 module.exports = app;

@@ -1,5 +1,5 @@
 {
-    "name": "@xola/server-name-generator",
+    "name": "server-name-generator",
     "version": "0.1.0",
     "description": "Server name generator",
     "main": "index.js",
@@ -8,29 +8,26 @@
         "url": "https://github.com/rushi/server-name-generator"
     },
     "scripts": {
-        "start": "serverless offline",
+        "start": "SLS_DEBUG=* serverless offline",
         "deploy": "serverless deploy",
         "remove": "serverless remove"
     },
     "author": "Rushi Vishavadia <rushi@hey.com>",
     "license": "ISC",
     "dependencies": {
-        "aws-lambda": "^1.0.7",
-        "aws-serverless-express": "^3.4.0",
         "cors": "^2.8.5",
         "express": "^4.18.1",
         "lodash": "^4.17.21",
-        "lodash-es": "^4.17.21",
-        "serverless": "^3.21.0",
-        "serverless-offline": "^12.0.4",
+        "serverless": "^3.30.1",
+        "serverless-http": "^3.2.0",
         "unique-names-generator": "^4.7.1"
     },
     "devDependencies": {
-        "nodemon": "^2.0.19",
+        "serverless-offline": "^12.0.4",
         "prettier": "^2.7.1"
     },
     "engines": {
-        "node": ">=14"
+        "node": ">=18"
     },
     "prettier": {
         "semi": true,
